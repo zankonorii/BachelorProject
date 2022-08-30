@@ -1,6 +1,7 @@
 package handller
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -51,4 +52,29 @@ func (h NewHandller) GetPost(ctx echo.Context) error {
 		logrus.Error(err)
 	}
 	return ctx.JSON(http.StatusAccepted, post)
+}
+
+
+func (h NewHandller) GetPostByUserId (ctx echo.Context) error{
+	posts := []PostResponse{}
+
+	results, err := h.DB.Query(fmt.Sprintf(`SELECT * FROM posts WHERE user_id = %d`), ctx.Param("id"))
+	if err != nil {
+		logrus.Error(err)
+		return err
+	}
+
+	for results.Next(){
+		var post PostResponse
+
+		err = results.Scan(&post.ID, &post.UserId, &post.Likes, &post.Views, &post.Image, &post.Available, &post.Name, &post.UpdatedAt, &post.CreatedAt)
+
+		if err != nil {
+			logrus.Error(err)
+		}
+
+		posts = append(posts, post)
+	}
+
+	return ctx.JSON(http.StatusOK, posts)
 }

@@ -35,8 +35,8 @@ func main() {
 
 	e.GET("/posts", h.GetPosts)
 	e.GET("/post/:id", h.GetPost)
-	// e.GET("/post/:pid/user/:uid", h.GetPosts)
-	e.POST("/post", h.CreatePost)
+	e.GET("/user-post/:id", h.GetPosts)
+	e.POST("/post", h.GetPostByUserId)
 	// e.PUT("/post/:id", h.GetPosts)
 	// e.DELETE("/post/:id", h.GetPosts)
 
