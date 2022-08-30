@@ -39,6 +39,10 @@ func main() {
 	e.POST("/post", h.CreatePost)
 	e.PUT("/post/:id", h.Updatepost)
 	e.DELETE("/post/:id", h.DeletePost)
+	e.GET("/post-add-like/:id", h.IncreaseLike)
+	e.GET("/post-mins-like/:id", h.DecreaseLike)
+	e.GET("/post-add-view/:id", h.IncreaseView)
+	e.GET("/post-mins-view/:id", h.DecreaseView)
 
 
 	e.Logger.Fatal(e.Start(":8300"))
