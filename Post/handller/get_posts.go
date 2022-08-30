@@ -1,8 +1,10 @@
 package handller
 
 import (
-	"github.com/labstack/echo/v4"
 	"net/http"
+
+	"github.com/labstack/echo/v4"
+	"github.com/sirupsen/logrus"
 )
 
 type PostResponse struct {
@@ -18,6 +20,25 @@ type PostResponse struct {
 }
 
 func (h NewHandller) GetPosts(ctx echo.Context) error {
+	posts := []PostResponse{}
 
-	return ctx.JSON(http.StatusOK, nil)
+	results, err := h.DB.Query("SELECT * FROM posts")
+	if err != nil {
+		logrus.Error(err)
+	}
+
+	for results.Next(){
+		var post PostResponse
+
+		err = results.Scan(&post.ID, &post.UserId, &post.Likes, &post.Views, &post.Image, &post.Available, &post.Name, &post.UpdatedAt, &post.CreatedAt)
+
+		if err != nil {
+			logrus.Error(err)
+		}
+
+		posts = append(posts, post)
+	}
+
+	return ctx.JSON(http.StatusOK, posts)
+
 }

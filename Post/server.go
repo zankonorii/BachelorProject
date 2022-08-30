@@ -33,7 +33,7 @@ func main() {
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
 	}))
 
-	// e.GET("/posts", h.GetPosts)
+	e.GET("/posts", h.GetPosts)
 	// e.GET("/post/:id", h.GetPosts)
 	// e.GET("/post/:pid/user/:uid", h.GetPosts)
 	e.POST("/post", h.CreatePost)
