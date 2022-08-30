@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user
+  labels:
+    name: user
+  annotations:
+    "sidecar.jaegertracing.io/inject": "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user
+  template:
+    metadata:
+      labels:
+        app: users
+    spec:
+      containers:
+        - name: user
+          image:  zankonori/users:v1
+          imagePullPolicy: Always
+          env:
+            - name: COUNTER_ENDPOINT
+              value: "http://user.default.svc.cluster.local:1323"
+          ports:
+            - name: frontend-port
+              containerPort: 8000
+              protocol: TCP
