@@ -31,7 +31,7 @@ func main() {
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
 	}))
 
-	// e.GET("/checkLogIn")
+	e.POST("/check-login", h.CheckLogIn)
 	e.POST("/login", h.LogIn)
 	e.POST("/register", h.Register)
 
