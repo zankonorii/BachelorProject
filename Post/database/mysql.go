@@ -35,7 +35,7 @@ func NewMySQL() (*sql.DB, error) {
 		return nil, err
 	}
 
-	sql := "CREATE TABLE IF NOT EXISTS posts(id int NOT NULL AUTO_INCREMENT, user_id int NOT NULL, likes int DEFAULT(0), views int DEFAULT(0), image text, avilable TINYINT DEFAULT (0) , name varchar(255), updated_at TIMESTAMP DEFAULT(CURRENT_TIMESTAMP), created_at TIMESTAMP DEFAULT(CURRENT_TIMESTAMP), PRIMARY  KEY (id));"
+	sql := "CREATE TABLE IF NOT EXISTS posts(id int NOT NULL AUTO_INCREMENT, user_id int NOT NULL, likes int DEFAULT(0), views int DEFAULT(0), image text, available TINYINT DEFAULT (0) , name varchar(255), updated_at TIMESTAMP DEFAULT(CURRENT_TIMESTAMP), created_at TIMESTAMP DEFAULT(CURRENT_TIMESTAMP), PRIMARY  KEY (id));"
 
 	stmt, err := db.Prepare(sql)
 
