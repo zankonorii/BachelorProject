@@ -34,7 +34,7 @@ func main() {
 	}))
 
 	e.GET("/posts", h.GetPosts)
-	// e.GET("/post/:id", h.GetPosts)
+	e.GET("/post/:id", h.GetPost)
 	// e.GET("/post/:pid/user/:uid", h.GetPosts)
 	e.POST("/post", h.CreatePost)
 	// e.PUT("/post/:id", h.GetPosts)

@@ -42,3 +42,13 @@ func (h NewHandller) GetPosts(ctx echo.Context) error {
 	return ctx.JSON(http.StatusOK, posts)
 
 }
+
+func (h NewHandller) GetPost(ctx echo.Context) error {
+	var post PostResponse
+
+	err := h.DB.QueryRow("SELECT * FROM posts WHERE id = ?", ctx.Param("id")).Scan(&post.ID, &post.UserId, &post.Likes, &post.Views, &post.Image, &post.Available, &post.Name, &post.UpdatedAt, &post.CreatedAt)
+	if err != nil {
+		logrus.Error(err)
+	}
+	return ctx.JSON(http.StatusAccepted, post)
+}
