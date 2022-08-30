@@ -17,6 +17,7 @@ type PostRequest struct {
 }
 
 func (h NewHandller) CreatePost(ctx echo.Context) error {
+	logrus.Info(fmt.Sprintf(`{"label":"info", "message":"Start Inset New Post ", "time":"%s"}`, time.Now()))
 	post := &PostRequest{}
 	if err := ctx.Bind(post); err != nil {
 		logrus.Error(err)
@@ -24,6 +25,8 @@ func (h NewHandller) CreatePost(ctx echo.Context) error {
 	}
 
 	sql := "INSERT INTO posts(user_id, name, image, available, likes, views, updated_at, created_at) VALUES(?,?,?,?,0,0,current_timestamp, current_timestamp)"
+	logrus.Info(fmt.Sprintf(`{"label":"info", "message":"Added User To DataBase ", "time":"%s", "query":"%s", "post":{"user_id":%d, "name":%s, "image":%s, "avilable":%t}}`, time.Now(), sql, post.UserId, post.Name, post.Image, post.Available))
+
 	stmt, err := h.DB.Prepare(sql)
 	if err != nil {
 		logrus.Error(err)
@@ -32,6 +35,7 @@ func (h NewHandller) CreatePost(ctx echo.Context) error {
 
 	defer stmt.Close()
 
+	logrus.Info(fmt.Sprintf(`{"label":"info", "message":"Added User To DataBase Excute stmt ", "time":"%s"}`, time.Now()))
 	result, err := stmt.Exec(post.UserId, post.Name, post.Image, post.Available)
 	if err != nil {
 		logrus.Error(err)
