@@ -33,6 +33,7 @@ func main() {
 
 	// e.GET("/checkLogIn")
 	e.POST("/login", h.LogIn)
+	e.POST("/register", h.Register)
 
 	e.Logger.Fatal(e.Start(":9001"))
 }

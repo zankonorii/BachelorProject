@@ -12,6 +12,7 @@ import (
 type UserRequest struct{
 	Name string `json:"name"`
 	LastName string `json:"last_name"`
+	JWT string `json:"jwt"`
 }
 
 func (h NewHandller)CreateUser(ctx echo.Context) error{
@@ -25,7 +26,7 @@ func (h NewHandller)CreateUser(ctx echo.Context) error{
 	logrus.Info(fmt.Sprintf(`{"label":"info", "message":"Sended Data ", "time":"%s", "data":"{"name":"%s", "lastName":"%s"}"}`,
 	 time.Now(), user.Name, user.LastName))
 
-	sql := "INSERT INTO users(name, last_name, updated_at, created_at) VALUES(?,?,current_timestamp, current_timestamp)"
+	sql := "INSERT INTO users(name, last_name, jwt,updated_at, created_at) VALUES(?,?,?,current_timestamp, current_timestamp)"
 	stmt , err := h.DB.Prepare(sql)
 	if err != nil {
 		logrus.Error(err)
@@ -34,7 +35,7 @@ func (h NewHandller)CreateUser(ctx echo.Context) error{
 
 	defer stmt.Close()
 
-	result, err := stmt.Exec(user.Name, user.LastName)
+	result, err := stmt.Exec(user.Name, user.LastName, user.JWT)
 	if err != nil {
 		logrus.Error(err)
 		return err
