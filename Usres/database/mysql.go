@@ -35,7 +35,7 @@ func NewMySQL() (*sql.DB, error) {
 		return nil, err
 	}
 
-	sql := "CREATE TABLE IF NOT EXISTS users(id int NOT NULL AUTO_INCREMENT, name varchar(255), last_name varchar(255), created_at TIMESTAMP DEFAULT(CURRENT_TIMESTAMP), updated_at TIMESTAMP DEFAULT(CURRENT_TIMESTAMP), PRIMARY  KEY (id));"
+	sql := "CREATE TABLE IF NOT EXISTS users(id int NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL UNIQUE, last_name varchar(255), jwt text, created_at TIMESTAMP DEFAULT(CURRENT_TIMESTAMP), updated_at TIMESTAMP DEFAULT(CURRENT_TIMESTAMP), PRIMARY  KEY (id));"
 	
 	stmt , err := db.Prepare(sql)
 

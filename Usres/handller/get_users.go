@@ -39,7 +39,7 @@ func (h NewHandller)GetUsers(ctx echo.Context) error {
 	return ctx.JSON(http.StatusOK, users)
 }
 
-func (h NewHandller) GetUser (ctx echo.Context) error {
+func (h NewHandller)GetUser(ctx echo.Context) error {
 
 	var user UserResponse
 
