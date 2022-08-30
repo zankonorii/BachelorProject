@@ -1,9 +1,7 @@
 package handler
 
 import (
-	"fmt"
 	"net/http"
-	"time"
 
 	"github.com/labstack/echo/v4"
 	"github.com/sirupsen/logrus"
