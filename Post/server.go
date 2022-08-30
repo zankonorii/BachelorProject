@@ -38,7 +38,7 @@ func main() {
 	e.GET("/user-post/:id", h.GetPostByUserId)
 	e.POST("/post", h.CreatePost)
 	e.PUT("/post/:id", h.Updatepost)
-	// e.DELETE("/post/:id", h.GetPosts)
+	e.DELETE("/post/:id", h.DeletePost)
 
 
 	e.Logger.Fatal(e.Start(":8300"))
