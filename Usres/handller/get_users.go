@@ -43,7 +43,7 @@ func (h NewHandller)GetUser(ctx echo.Context) error {
 
 	var user UserResponse
 
-	err := h.DB.QueryRow("SELECT * FROM users WHERE id = ?", ctx.Param("id")).Scan(&user.ID, &user.Name, &user.LastName , &user.UpdatedAt, &user.CreatedAt)
+	err := h.DB.QueryRow("SELECT id, name, last_name, updated_at, created_at FROM users WHERE id = ?", ctx.Param("id")).Scan(&user.ID, &user.Name, &user.LastName , &user.UpdatedAt, &user.CreatedAt)
 	if err != nil {
 		logrus.Error(err)
 	}
