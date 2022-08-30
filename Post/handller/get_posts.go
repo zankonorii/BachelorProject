@@ -3,6 +3,7 @@ package handller
 import (
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/labstack/echo/v4"
 	"github.com/sirupsen/logrus"
@@ -55,15 +56,17 @@ func (h NewHandller) GetPost(ctx echo.Context) error {
 }
 
 
-func (h NewHandller) GetPostByUserId (ctx echo.Context) error{
+func (h NewHandller) GetPostByUserId(ctx echo.Context) error {
+	logrus.Info(fmt.Sprintf(`{"label":"info", "message":"Get User's Postss ", "time":"%s"}`, time.Now()))
 	posts := []PostResponse{}
 
-	results, err := h.DB.Query(fmt.Sprintf(`SELECT * FROM posts WHERE user_id = %d`), ctx.Param("id"))
+	results, err := h.DB.Query("SELECT * FROM posts WHERE user_id = ?", ctx.Param("id"))
 	if err != nil {
 		logrus.Error(err)
 		return err
 	}
-
+	
+	logrus.Info(fmt.Sprintf(`{"label":"info", "message":"loop to get posts ", "time":"%s"}`, time.Now()))
 	for results.Next(){
 		var post PostResponse
 
