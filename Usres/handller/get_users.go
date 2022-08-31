@@ -19,7 +19,7 @@ func (h NewHandller)GetUsers(ctx echo.Context) error {
 	
 	users := []UserResponse{}
 
-	results, err := h.DB.Query("SELECT * FROM users")
+	results, err := h.DB.Query("SELECT id, name, last_name, updated_at, created_at FROM users")
 	if err != nil {
 		logrus.Error(err)
 	}

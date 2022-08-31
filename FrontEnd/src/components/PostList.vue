@@ -21,7 +21,7 @@ import PostItem from './PostItem.vue'
     },
     async mounted(){
       await axios
-          .get("http://localhost:9000/posts")
+          .get("http://localhost:8300/posts")
           .then(response => (this.posts = response.data))
     }
   }

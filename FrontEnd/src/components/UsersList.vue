@@ -4,7 +4,7 @@ import UserItem from './UserItem.vue'
 
 <template>
   <div class="container">
-    <div v-for="user in users">
+    <div v-for="user in users" v-bind:key="user">
       <UserItem :user="user"> </UserItem>
     </div>
   </div>
@@ -21,7 +21,7 @@ import UserItem from './UserItem.vue'
     },
     async mounted(){
       await axios
-          .get("http://localhost:9000/users")
+          .get("http://localhost:8200/users")
           .then(response => (this.users = response.data))
     }
   }

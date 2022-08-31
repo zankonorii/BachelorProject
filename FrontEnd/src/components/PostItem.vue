@@ -6,19 +6,41 @@
       <div class="grid-container">
 
         <div class="grid-child-posts">
-          {{post.price}} $
+          likes {{post.likes}}
+        </div>
+
+        <div class="grid-child-posts">
+          view {{post.views}}
         </div>
 
 
       </div>
-      <button class="btn draw-border">BUY</button>
+      <button class="btn draw-border" @click="like(post.id)">Like</button>
+      <button class="btn draw-border" @click="view(post.id)">View</button>
 
     </div>
 </template>
 
 <script>
+  import axios from "axios";
   export default {
-    props: ['post']
+    props: ['post'],
+    methods:{
+      like(id){
+        axios
+        .get("http://localhost:8300/post-add-like/"+id)
+        .then((responce) => {
+          this.post.likes += 1;
+        })
+      },
+      view(id){
+        axios
+        .get("http://localhost:8300/post-add-view/"+id)
+        .then((responce) => {
+          this.post.views += 1;
+        })
+      },
+    },
   }
 </script>
 
@@ -28,7 +50,7 @@
 
 .card {
   background-color: #222831;
-  height: 27rem;
+  height: 30rem;
   width: 20rem;
   border-radius: 5px;
   display: flex;

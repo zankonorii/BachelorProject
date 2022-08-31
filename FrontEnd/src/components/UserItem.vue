@@ -1,27 +1,28 @@
 <template>
     <div class="card">
 <!--      -->
-      <img :src=user.image alt="Person" class="card__image">
-      <p class="card__name">{{user.name}} {{user.last_name}}</p>
+      <!-- <img :src=user.image alt="Person" class="card__image"> -->
+      <p class="card__name">{{user.name}}</p>
+      <p class="card__name">{{user.last_name}}</p>
       <div class="grid-container">
 
-        <div class="grid-child-posts">
+        <!-- <div class="grid-child-posts">
           {{user.posts}} Post
         </div>
 
         <div class="grid-child-followers">
           {{user.likes}} Likes
-        </div>
+        </div> -->
 
       </div>
-      <ul class="social-icons">
+      <!-- <ul class="social-icons">
         <li><a href="#"><i class="fa fa-instagram"></i></a></li>
         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
         <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
         <li><a href="#"><i class="fa fa-codepen"></i></a></li>
-      </ul>
-      <button class="btn draw-border">Follow</button>
-      <button class="btn draw-border">Message</button>
+      </ul> -->
+      <!-- <button class="btn draw-border">Follow</button>
+      <button class="btn draw-border">Message</button> -->
 
     </div>
 </template>
