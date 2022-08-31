@@ -1,43 +1,34 @@
 <template>
-    <div class="login">
+    <div class="login" v-if="user != null">
       <form action="#" class="form">
-        <h4 class="title">LogIn</h4>
-        <h6 class="danger" v-show="danger">name or password isn't currect.</h6>
-        <input type="text" placeholder="name" v-model="name" class="input-box">
-        <input type="password" name="password" v-model="password" placeholder="Password" id="Password" class="input-box">
+        <h4 class="title">Profile</h4>
+        <p class="details">Name : {{user.name}}</p>
         <button type="button" class="button" @click="login()">LogIn</button>
       </form>
+    </div>
+    <div v-else>
+      you aren't logged in, please first login
     </div>
 </template>
 
 <script>
-    import axios from "axios";
-
     export default{
         data(){
             return{
-                name : "",
-                password : "",
-                danger: false,
+                user : null,
+
             }
         },
-        methods:{
-            login(){
-                axios
-                    .post("http://localhost:9001/login",{
-                        name : this.name,
-                        password : this.password
-                    })
-                    .then((response) => {
-                        localStorage.setItem("user", JSON.stringify(response.data));
-                        this.$router.replace("/profile")
-                    })
-                    .catch(error => {
-                        this.danger = true;
-                        console.log("ERROR :: ", error);
-                    })
-            },
-        }
+        beforeCreate(){
+          this.user = JSON.parse(localStorage.getItem("user"));
+          console.log(this.user);
+
+          if (this.user == null){
+            this.$router.replace("/login")
+          }
+          console.log(this.user.name);
+          // this.name = localStorage.user.name
+        },
     }
 </script>
 
@@ -95,6 +86,10 @@
         margin-top: 2rem;
         width: 5rem;
         height: 2rem;
+      }
+
+      .details{
+        color: #41b882;
       }
 
     }
