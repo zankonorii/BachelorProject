@@ -13,7 +13,10 @@
     "vue-router": "^4.0.15"
   },
   "devDependencies": {
+    "@mdi/font": "^7.0.96",
+    "@mdi/js": "^7.0.96",
     "@vitejs/plugin-vue": "^2.3.3",
+    "@vue/devtools": "^6.2.1",
     "@vue/test-utils": "^2.0.0",
     "bootstrap": "^4.0.0-beta",
     "jquery": "^3.6.0",

@@ -1,12 +1,12 @@
 <template>
     <div class="card">
 <!--      -->
-      <img :src=product.image alt="Person" class="card__image">
-      <p class="card__name">{{product.name}} </p>
+      <img :src=post.image alt="Person" class="card__image">
+      <p class="card__name">{{post.name}} </p>
       <div class="grid-container">
 
         <div class="grid-child-posts">
-          {{product.price}} $
+          {{post.price}} $
         </div>
 
 
@@ -18,7 +18,7 @@
 
 <script>
   export default {
-    props: ['product']
+    props: ['post']
   }
 </script>
 

@@ -1,11 +1,11 @@
 <script setup>
-import ProductItem from './ProductItem.vue'
+import PostItem from './PostItem.vue'
 </script>
 
 <template>
   <div class="container">
-    <div v-for="product in products">
-      <ProductItem :product="product"> </ProductItem>
+    <div v-for="post in posts" v-bind:key="post">
+      <PostItem :post="post"></PostItem>
     </div>
   </div>
 </template>
@@ -16,13 +16,13 @@ import ProductItem from './ProductItem.vue'
   export default{
     data(){
       return{
-        products: null
+        posts: null
       }
     },
     async mounted(){
       await axios
-          .get("http://localhost:9000/products")
-          .then(response => (this.products = response.data))
+          .get("http://localhost:9000/posts")
+          .then(response => (this.posts = response.data))
     }
   }
 </script>
